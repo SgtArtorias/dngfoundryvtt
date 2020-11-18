@@ -121,11 +121,11 @@
           },
           "hak": {
             "value": 0,
-            "ability": "wis"
+            "ability": "int"
           },
           "his": {
             "value": 0,
-            "ability": "int"
+            "ability": "wis"
           },
           "ins": {
             "value": 0,
