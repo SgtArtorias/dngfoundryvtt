@@ -3,16 +3,6 @@ import {ClassFeatures} from "./classFeatures.js"
 // Namespace Configuration Values
 export const DNG = {};
 
-// ASCII Artwork
-DNG.ASCII = `_______________________________
-______      ______ _____ _____
-|  _  \\___  |  _  \\  ___|  ___|
-| | | ( _ ) | | | |___ \\| |__
-| | | / _ \\/\\ | | |   \\ \\  __|
-| |/ / (_>  < |/ //\\__/ / |___
-|___/ \\___/\\/___/ \\____/\\____/
-_______________________________`;
-
 
 /**
  * The set of Ability Scores used within the system
@@ -21,7 +11,7 @@ _______________________________`;
 DNG.abilities = {
   "str": "DNG.AbilityStr",
   "dex": "DNG.AbilityDex",
-  "con": "DNG.AbilityCon",
+  "mag": "DNG.AbilityMag",
   "int": "DNG.AbilityInt",
   "wis": "DNG.AbilityWis",
   "cha": "DNG.AbilityCha"
@@ -30,7 +20,7 @@ DNG.abilities = {
 DNG.abilityAbbreviations = {
   "str": "DNG.AbilityStrAbbr",
   "dex": "DNG.AbilityDexAbbr",
-  "con": "DNG.AbilityConAbbr",
+  "mag": "DNG.AbilityMagAbbr",
   "int": "DNG.AbilityIntAbbr",
   "wis": "DNG.AbilityWisAbbr",
   "cha": "DNG.AbilityChaAbbr"
@@ -415,7 +405,7 @@ DNG.senses = {
  */
 DNG.skills = {
   "acr": "DNG.SkillAcr",
-  "ani": "DNG.SkillAni",
+  "hak": "DNG.SkillHak",
   "arc": "DNG.SkillArc",
   "ath": "DNG.SkillAth",
   "dec": "DNG.SkillDec",
@@ -428,7 +418,7 @@ DNG.skills = {
   "prc": "DNG.SkillPrc",
   "prf": "DNG.SkillPrf",
   "per": "DNG.SkillPer",
-  "rel": "DNG.SkillRel",
+  "eng": "DNG.SkillEng",
   "slt": "DNG.SkillSlt",
   "ste": "DNG.SkillSte",
   "sur": "DNG.SkillSur"
