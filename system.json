@@ -1,9 +1,9 @@
 {
   "name": "dng",
-  "title": "DnG - Fifth Edition System",
-  "description": "A system for playing the fifth edition of the worlds most popular role-playing game in the Foundry Virtual Tabletop environment.",
-  "version": "1.1.1",
-  "author": "Atropos",
+  "title": "Dungeons&Guns",
+  "description": "A system for Adaptation from DnD 5e",
+  "version": "0.1",
+  "author": "Atropos, Sgt.Artorias",
   "scripts": [],
   "esmodules": ["dng.js"],
   "styles": ["dng.css"],
