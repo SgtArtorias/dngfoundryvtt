@@ -94,6 +94,6 @@
   "minimumCoreVersion": "0.7.6",
   "compatibleCoreVersion": "0.7.6",
   "url": "https://github.com/SgtArtorias/dngfoundryvtt",
-  "manifest": "https://github.com/SgtArtorias/dngfoundryvtt/blob/master/system.json",
+  "manifest": "https://raw.githubusercontent.com/SgtArtorias/dngfoundryvtt/master/system.json",
   "download": "https://github.com/SgtArtorias/dngfoundryvtt/archive/master.zip"
 }
