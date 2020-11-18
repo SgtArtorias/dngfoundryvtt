@@ -3,7 +3,7 @@
   "title": "Dungeons&Guns",
   "description": "A system for Adaptation from DnD 5e",
   "version": "0.1",
-  "author": "Atropos, Sgt.Artorias",
+  "author": "Sgt.Artorias",
   "scripts": [],
   "esmodules": ["dng.js"],
   "styles": ["dng.css"],
