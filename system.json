@@ -2,7 +2,7 @@
   "name": "dng",
   "title": "Dungeons&Guns",
   "description": "A system for Adaptation from DnD 5e",
-  "version": "0.1",
+  "version": "0.2",
   "author": "Sgt.Artorias",
   "scripts": [],
   "esmodules": ["dng.js"],
