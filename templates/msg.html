@@ -1,0 +1,54 @@
+<div class="roll-template">
+    <div class="roll-flexrow">
+        {{#if token.img}}
+        <img class = "roll-sender-image" src="{{token.img}}" title="{{token.name}}"/>
+        {{/if}}
+
+        <div class="roll-flexrow roll-underline">
+            <h4 class="roll-sender-name">{{actor}}</h4>
+            <span class="roll-delete-button">
+                {{#isGM}}
+                <a class="roll-message-delete"><i class="fas fa-trash"></i></a>
+                {{/isGM}}
+            </span>
+        </div>
+
+    </div>
+
+    {{#if isWhisper}}
+    <span class="whisper-to">{{localize 'CHAT.To'}}: {{whisperTo}}</span>
+    {{/if}}
+
+    {{#if flavor}}
+    <div class="roll-flavor">
+        {{{flavor}}}
+    </div>
+    {{/if}}
+
+    <div class="roll-result">
+        {{#if msg}}
+        {{{msg}}}
+
+        {{/if}}
+
+
+        {{#if submsg}}
+        <div class="roll-conditional">
+            {{{submsg}}}
+        </div>
+        {{/if}}
+    </div>
+
+    <div class="roll-extra">
+
+        <div class="roll-flexrow">
+
+            <div class="roll-user righttext">
+                {{{user}}}
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

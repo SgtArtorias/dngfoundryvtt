@@ -1,0 +1,115 @@
+<div class="roll-template">
+    <div class="roll-flexrow">
+        {{#if token.img}}
+        <img class = "roll-sender-image" src="{{token.img}}" title="{{token.name}}"/>
+        {{/if}}
+
+        <div class="roll-flexrow roll-underline">
+            <h4 class="roll-sender-name">{{actor}}</h4>
+            <span class="roll-delete-button">
+                {{#isGM}}
+                <a class="roll-message-delete"><i class="fas fa-trash"></i></a>
+                {{/isGM}}
+            </span>
+        </div>
+
+    </div>
+
+    {{#if isWhisper}}
+    <span class="whisper-to">{{localize 'CHAT.To'}}: {{whisperTo}}</span>
+    {{/if}}
+
+    {{#if flavor}}
+    <div class="roll-flavor">
+        {{{flavor}}}
+    </div>
+    {{/if}}
+
+    <div class="roll-result">
+        {{#if iscrit}}
+        <div class="roll-iscrit">
+            {{{result}}}
+        </div>
+        {{else}}
+        {{#if isfumble}}
+        <div class="roll-isfumble">
+            {{{result}}}
+        </div>
+        {{else}}
+        {{{result}}}
+        {{/if}}
+        {{/if}}
+
+
+        {{#if conditional}}
+        <div class="roll-conditional">
+            {{{conditional}}}
+        </div>
+        {{/if}}
+    </div>
+
+    <div class="roll-extra">
+
+        <div class="roll-detail">
+            <div class="roll-area">
+                <div class="roll-flexrow">
+                    <label class="label-roll">Formula:</label>
+                    <div class="roll-formula">{{{formula}}}</div>
+                </div>
+                <div class="roll-flexrow">
+                    <label class="label-roll">Modifier:</label>
+                    <div class="roll-formula">{{{mod}}}</div>
+                </div>
+                <ol class="roll-list">
+                    {{#each dice as |die key|}}
+                    <li class="roll-flexrow" data-item-id="{{key}}">
+                        <label class="label-roll">{{{die.rolls.length}}}d{{{die.faces}}}:</label>
+                        {{#each die.rolls as |roll id|}}
+                        <div class="roll-die">{{{roll.result}}}</div>
+                        {{/each}}
+                    </li>
+                    {{/each}}
+                </ol>
+                <ol class="roll-list">
+                    {{#each subdice as |subdie key|}}
+                    <li class="roll-flexrow" data-item-id="{{key}}">
+                        <label class="label-roll">{{{subdie.name}}} ({{{subdie.expr}}}):</label>
+                        {{#each subdie.rolls.dice as |subrolldie id|}}
+
+                        {{#each subrolldie.rolls as |subrollresult cid|}}
+                        <div class="roll-die">{{{subrollresult.result}}}</div>
+                        {{/each}}
+
+                        {{/each}}
+                    </li>
+                    {{/each}}
+                </ol>
+            </div>
+        </div>
+
+
+
+        <div class="roll-flexrow">
+
+            <a class="roll-wbutton">
+                <i class="roll-detail-button roll-wbutton">Detail</i>
+            </a>
+            <a class="roll-wbutton">
+                <i class="roll-main-button roll-wbutton">Result</i>
+            </a>
+
+            <div class="roll-user">
+                {{{user}}}
+            </div>
+        </div>
+
+        <div class="roll-flexrow">
+            <div class="roll-timestamp message-timestamp">
+                {{{data.timestamp}}}
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

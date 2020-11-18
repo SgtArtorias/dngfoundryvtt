@@ -1,0 +1,348 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <div class="new-row">
+            <div class="header-left">
+                <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+                <div class="new-block">
+                    <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+                    <h3 class="typelabel">PROPERTY</h3>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <div class="atabs">
+        <nav class="sheet-tabs tabs" data-group="primary">
+            <a class="item" data-tab="description">Description</a>
+            <a class="item" data-tab="details">Details</a>
+        </nav>
+    </div>
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+        {{!-- Description Tab --}}
+        <div class="tab biography active" data-group="primary" data-tab="description">
+            {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+        </div>
+
+        {{!-- Details Tab --}}
+        <div class="tab biography active" data-group="primary" data-tab="details">
+            <div class="flexblock">
+                <div class="col-1-2">
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Key</label>
+                            <input type="text" name="data.attKey" value="{{data.attKey}}"/>
+                        </div>
+                    </div>
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Data Type</label>
+                            <select name="data.datatype"  data-type="String">
+                                {{#select item.data.datatype}}
+                                {{#each item.data.dtypes as |dtype key|}}
+                                <option  value="{{key}}">{{key}}</option> {{/each}} {{/select}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Hidden</label>
+                            <input class="check-ishidden" name="data.ishidden" id="check-ishidden" type="checkbox" {{checked item.data.ishidden}}/>
+                        </div>
+                    </div>
+
+                    {{#if item.data.ishidden}}
+                    {{else}}
+                    {{#ifNot item.data.datatype "table"}}
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Tag</label>
+                            <input type="text" name="data.tag" value="{{data.tag}}"/>
+                        </div>
+                    </div>
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Rollable</label>
+                            <input class="check-hasroll" name="data.hasroll" id="check-hasroll" type="checkbox" {{checked item.data.hasroll}}/>
+                        </div>
+                    </div>
+                    {{/ifNot}}
+                    {{#ifCond item.data.datatype "table"}}
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Group (drop here)</label>
+                            <input type="text" name="data.group.name" value="{{data.group.name}}" readonly>
+                        </div>
+                    </div>
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Editable</label>
+                            <input class="check-editable" name="data.editable" id="check-editable" type="checkbox" {{checked item.data.editable}}/>
+                        </div>
+                    </div>
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Has Header?</label>
+                            <input class="check-hasheader" name="data.hasheader" id="check-hasheader" type="checkbox" {{checked item.data.hasheader}}/>
+                        </div>
+                    </div>
+
+                    {{#ifCond item.data.datatype "table"}}
+                    {{#if item.data.hasheader}}
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Column Name</label>
+                            {{#if data.namecolumn}}
+                            <input type="text" name="data.namecolumn" value="{{data.namecolumn}}"/>
+                            {{else}}
+                            <input type="text" name="data.namecolumn" value="Item"/>
+                            {{/if}}
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{/ifCond}}
+
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Height</label>
+                            <select name="data.tableheight"  data-type="String">
+                                {{#select item.data.tableheight}}
+                                <option  value="F">FREE</option>
+                                <option  value="S">SMALL</option>
+                                <option  value="M">MED</option>
+                                <option  value="T">TALL</option>
+                                {{/select}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Item Names</label>
+                            <select name="data.onlynames"  data-type="String">
+                                {{#select item.data.onlynames}}
+                                <option  value="DEFAULT">YES</option>
+                                <option  value="NO_NAMES">NO</option>
+                                <option  value="ONLY_NAMES">ONLY NAMES</option>
+                                {{/select}}
+                            </select>
+                        </div>
+                    </div>
+                    {{#ifCond item.data.onlynames "ONLY_NAMES"}}
+                    {{else}}
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Show Units?</label>
+                            <input class="check-hasunits" name="data.hasunits" id="check-hasunits" type="checkbox" {{checked item.data.hasunits}}/>
+                        </div>
+                    </div>
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Show Activation?</label>
+                            <input class="check-hasactivation" name="data.hasactivation" id="check-hasactivation" type="checkbox" {{checked item.data.hasactivation}}/>
+                        </div>
+                    </div>
+
+                    {{/ifCond}}
+                    {{/ifCond}}
+
+                    {{/if}}
+                </div>
+                <div class="col-1-2">
+
+                    {{#ifNot item.data.datatype "table"}}
+                    {{#ifNot item.data.datatype "label"}}
+                    <div class="new-row">
+
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Default Value</label>
+                            <input type="text" name="data.defvalue" value="{{data.defvalue}}"/>
+                        </div>
+                    </div>
+                    {{#if item.data.ishidden}}
+                    {{else}}
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Editable</label>
+                            <input class="check-editable" name="data.editable" id="check-editable" type="checkbox" {{checked item.data.editable}}/>
+                        </div>
+                    </div>
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Has Label?</label>
+                            <input class="check-haslabel" name="data.haslabel" id="check-haslabel" type="checkbox" {{checked item.data.haslabel}}/>
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    {{/ifNot}}
+
+                    {{#if item.data.ishidden}}
+                    {{else}}
+                    {{#if item.data.haslabel}}
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Label size</label>
+                            <select  name="data.labelsize"  data-type="String">
+                                {{#select item.data.labelsize}}
+                                <option  value="F">Fit</option>
+                                <option  value="S">Small</option>
+                                <option  value="M">Medium</option>
+                                <option  value="L">Large</option>
+                                {{/select}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Label Format</label>
+                            <select  name="data.labelformat"  data-type="String">
+                                {{#select item.data.labelformat}}
+                                <option  value="N">Normal</option>
+                                <option  value="B">Bold</option>
+                                <option  value="S">Small</option>
+                                <option  value="D">Die</option>
+                                {{/select}}
+                            </select>
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{/if}}
+                    {{/ifNot}}
+
+                    {{#ifCond item.data.datatype "simpletext"}}
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Input Size</label>
+                            <select  name="data.inputsize"  data-type="String">
+                                {{#select item.data.inputsize}}
+                                <option  value="F">Fit</option>
+                                <option  value="S">Small</option>
+                                <option  value="M">Medium</option>
+                                <option  value="L">Large</option>
+                                {{/select}}
+                            </select>
+                        </div>
+                    </div>
+                    {{/ifCond}}
+                    {{#ifCond item.data.datatype "textarea"}}
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Input Size</label>
+                            <select  name="data.inputsize"  data-type="String">
+                                {{#select item.data.inputsize}}
+                                <option  value="F">Fit</option>
+                                <option  value="S">Small</option>
+                                <option  value="M">Medium</option>
+                                <option  value="L">Large</option>
+                                {{/select}}
+                            </select>
+                        </div>
+                    </div>
+                    {{/ifCond}}
+                </div>
+
+            </div>
+            {{#if item.data.hasroll}}
+            {{#ifNot item.data.datatype "table"}}
+            <div class="flexblock">
+                <div class="col-1-1">
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Roll Name</label>
+                            <input type="text" name="data.rollname" value="{{data.rollname}}"/>
+                            <label class="label-medlarge">Roll ID</label>
+                            <input type="text" name="data.rollid" value="{{data.rollid}}"/>
+                        </div>
+                    </div>
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Roll Formula</label>
+                            <input type="text" name="data.rollexp" value="{{data.rollexp}}"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/ifNot}}
+            {{/if}}
+
+            {{#ifNot item.data.datatype "table"}}
+            {{#ifNot item.data.datatype "textarea"}}
+            {{#ifNot item.data.datatype "list"}}
+            {{#ifNot item.data.datatype "label"}}
+            {{#ifNot item.data.datatype "checkbox"}}
+
+            <div class="flexblock">
+                {{#ifNot item.data.datatype "simpletext"}}
+                <div class="col-2-3">
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Max Value</label>
+                            <input type="text" name="data.automax" value="{{data.automax}}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1-3">
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-small righttext">Visible</label>
+                            <input class="check-maxvisible" name="data.maxvisible" id="check-maxvisible" type="checkbox" {{checked item.data.maxvisible}}/>
+                        </div>
+                    </div>
+                </div>
+                {{/ifNot}}
+            </div>
+
+            <div class="col-1-1">
+                <div class="new-row">
+                    <div class="flexblock-left">
+                        <label class="label-medlarge">Auto</label>
+                        <input type="text" name="data.auto" value="{{data.auto}}"/>
+                    </div>
+                </div>
+            </div>
+
+
+
+            {{/ifNot}}
+            {{/ifNot}}
+            {{/ifNot}}
+            {{/ifNot}}
+            {{/ifNot}}
+
+            {{#ifCond item.data.datatype "list"}}
+            <div class="flexblock">
+                <div class="col-1-1">
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Options (a,b,c)</label>
+                            <input type="text" name="data.listoptions" value="{{data.listoptions}}"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/ifCond}}
+
+            {{#ifCond item.data.datatype "radio"}}
+            <div class="flexblock">
+                <div class="col-1-2">
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Radio type</label>
+                            <select  name="data.radiotype"  data-type="String">
+                                {{#select item.data.radiotype}}
+                                <option  value="C">Circle</option>
+                                <option  value="S">Square</option>
+                                {{/select}}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/ifCond}}
+
+
+        </div>
+    </section>
+</form>

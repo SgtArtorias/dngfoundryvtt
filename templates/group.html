@@ -1,0 +1,79 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <div class="new-row">
+            <div class="header-left">
+                <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+                <div class="new-block">
+                    <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+                    <h3 class="typelabel">GROUP</h3>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <div class="atabs">
+        <nav class="sheet-tabs tabs" data-group="primary">
+            <a class="item" data-tab="description">Description</a>
+            <a class="item" data-tab="details">Details</a>
+            <a class="item" data-tab="properties">Properties</a>
+        </nav>
+    </div>
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+        {{!-- Description Tab --}}
+        <div class="tab biography active" data-group="primary" data-tab="description">
+            {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+        </div>
+
+        {{!-- Details Tab --}}
+        <div class="tab biography active" data-group="primary" data-tab="details">
+            <div class="flexblock">
+                <div class="col-1-2">
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Group Key</label>
+                            <input type="text" name="data.groupKey" value="{{data.groupKey}}" data-dtype="String"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-1-2">
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-med">Unique</label>
+                            <input class="check-haslabel" name="data.isUnique" id="check-haslabel" type="checkbox" {{checked item.data.isUnique}}/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{!-- Properties Tab --}}
+        <div class="tab properties scrollable" data-group="primary" data-tab="properties">
+            <div class="righttext">
+                <label class="label-med">Constant</label>
+            </div>
+            <ol class="properties-list">
+
+                {{#each data.properties as |property id|}}
+                <li class="property group-row-block" data-item-id="{{id}}">
+                    <h4 class="group-name">{{property.name}}</h4>
+                    <div class="groupblock">
+                        <div class="groupblock">
+                            <a class="group-controls item-top " title="Top Item"><i class="fas fa-arrow-alt-circle-up"></i></a>
+                            <a class="group-controls item-bottom" title="Bottom Item"><i class="fas fa-arrow-alt-circle-down"></i></a>
+                            <a class="group-controls item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                            <a class="group-controls item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+
+                        </div>
+                        <input class="check-isconstant" propname = {{property.id}} name="{{id}}.isconstant" type="checkbox" {{checked property.isconstant}}/>
+                    </div>
+                </li>
+                {{/each}}
+            </ol>
+        </div>
+
+    </section>
+</form>

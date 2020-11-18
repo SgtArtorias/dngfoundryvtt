@@ -1,0 +1,79 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
+
+        <div class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DNG.ItemName' }}"/>
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{itemType}}</h4>
+                <span class="item-status">{{itemStatus}}</span>
+            </div>
+
+            <ul class="summary flexrow">
+                <li>
+                    {{labels.featType}}
+                </li>
+                <li>
+                    <input type="text" name="data.requirements" value="{{data.requirements}}" placeholder="{{ localize 'DNG.Requirements' }}"/>
+                </li>
+                <li>
+                    <input type="text" name="data.source" value="{{data.source}}" placeholder="{{ localize 'DNG.Source' }}"/>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "DNG.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "DNG.Details" }}</a>
+        <a class="item" data-tab="effects">{{ localize "DNG.Effects" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        {{> "systems/dng/templates/items/parts/item-description.html"}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+
+            <h3 class="form-header">{{ localize "DNG.FeatureUsage" }}</h3>
+
+            {{!-- Item Activation Template --}}
+            {{> "systems/dng/templates/items/parts/item-activation.html"}}
+
+            {{!-- Recharge Requirement --}}
+            {{#if data.activation.type}}
+            <div class="form-group recharge">
+                <label>{{ localize "DNG.FeatureActionRecharge" }}</label>
+                <div class="form-fields">
+                    <span>{{ localize "DNG.FeatureRechargeOn" }}</span>
+                    <input type="text" name="data.recharge.value" value="{{data.recharge.value}}"
+                           data-dtype="Number" placeholder="{{ localize 'DNG.FeatureRechargeResult' }}"/>
+                    <label class="checkbox">
+                        {{ localize "DNG.Charged" }}
+                        <input type="checkbox" name="data.recharge.charged" {{checked data.recharge.charged}}/>
+                    </label>
+                </div>
+            </div>
+            {{/if}}
+
+            <h3 class="form-header">{{ localize "DNG.FeatureAttack" }}</h3>
+
+            {{!-- Item Action Template --}}
+            {{> "systems/dng/templates/items/parts/item-action.html"}}
+        </div>
+
+        {{!-- Effects Tab --}}
+        <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+            {{> "systems/dng/templates/actors/parts/active-effects.html"}}
+        </div>
+    </section>
+</form>

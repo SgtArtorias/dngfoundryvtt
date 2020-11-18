@@ -1,0 +1,246 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <div class="new-row">
+            <div class="header-left">
+                <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+                <div class="new-block">
+                    <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+                    <h3 class="typelabel cItem">cITEM</h3>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <div class="atabs">
+        <nav class="sheet-tabs tabs" data-group="primary">
+            <a class="item" data-tab="description">Info</a>
+            <a class="item" data-tab="attributes">Attributes</a>
+            {{#isGM}}
+            <a class="item" data-tab="groups">Groups</a>
+            <a class="item" data-tab="mods">Mods</a>
+            {{/isGM}}
+        </nav>
+    </div>
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+        {{!-- Description Tab --}}
+        <div class="tab biography active scrollable-bio" data-group="primary" data-tab="description">
+            {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+        </div>
+
+        {{!-- Attributes Tab --}}
+        <div class="tab attributes scrollable" data-group="primary" data-tab="attributes">
+            <div class="flexblock">
+                <div class="col-1-2">
+                    <div class="new-row attribute-list">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{!-- Groups Tab --}}
+        <div class="tab groups" data-group="primary" data-tab="groups">
+            <ol class="properties-list">
+                {{#each data.groups as |group id|}}
+                <li class="property flexrow" data-item-id="{{id}}">
+                    <h4 class="property-name">{{group.name}}</h4>
+                    <div class="property-row">
+                        <a class="property-controls item-top" title="Top Item"><i class="fas fa-arrow-alt-circle-up"></i></a>
+                        <a class="property-controls item-bottom" title="Bottom Item"><i class="fas fa-arrow-alt-circle-down"></i></a>
+                        <a class="property-controls item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="property-controls item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </div>
+                </li>
+                {{/each}}
+            </ol>
+        </div>
+
+        {{!-- Mods Tab --}}
+        <div class="tab mods  scrollable" data-group="primary" data-tab="mods">
+            <div class="flexblock">
+                <div class="col-1-1">
+                    <div class="flexblock-center-nopad">
+                        <select  name="data.usetype"  data-type="String">
+                            {{#select item.data.usetype}}
+                            <option  value="PAS">PASSIVE</option>
+                            <option  value="ACT">ACTIVATION</option>
+                            <option  value="CON">CONSUMABLE</option>
+                            {{/select}}
+                        </select>
+                        <label class="label-free">Self-destruct</label>
+                        <input class="check-selfdestruct" name="data.selfdestruct" id="check-selfdestruct" type="checkbox" {{checked item.data.selfdestruct}}/>
+                    </div>
+                    {{#ifNot data.usetype "PAS"}}
+                    <div class="flexblock-center-nopad">
+                        {{#ifCond data.usetype "CON"}}
+                        <label class="label-free">Permanent</label>
+                        <input class="check-ispermanent" name="data.ispermanent" id="check-ispermanent" type="checkbox" {{checked item.data.ispermanent}}/>
+
+                        <label class="label-small">Icon</label>
+                        <select  name="data.icon"  data-type="String">
+                            {{#select item.data.icon}}
+                            <option  value="BOOK">BOOK</option>
+                            <option  value="VIAL">VIAL</option>
+                            <option  value="STAR">STAR</option>
+                            {{/select}}
+                        </select>
+                        <label class="label-med righttext">Rechargable</label>
+                        <input class="check-rechargable" name="data.rechargable" id="check-rechargable" type="checkbox" {{checked item.data.rechargable}}/>
+                        {{/ifCond}}
+                    </div>
+                    <div class="flexblock-center-nopad">
+                        {{#ifCond data.usetype "CON"}}
+                        <label class="label-small">Uses</label>
+                        <input class="input-medlarge" type="text" name="data.maxuses" value="{{data.maxuses}}"/>
+                        {{/ifCond}}
+                    </div>
+                    <div class="new-row">
+                        <div class="flexblock-simple">
+                            <label class="label-large">Roll Name</label>
+                            <input class="input-medlarge" type="text" name="data.rollname" value="{{data.rollname}}"/>
+                            <label class="label-large righttext">Roll ID</label>
+                            <input class="input-free" type="text" name="data.rollid" value="{{data.rollid}}"/>
+                        </div>
+                        <div class="flexblock-simple">
+                            <label class="label-small">ROLL</label>
+                            <input class="input-free" type="text" name="data.roll" value="{{data.roll}}"/>
+                        </div>
+                    </div>
+                    {{/ifNot}}
+                    <div class="new-row">
+                        <div class="flexblock-center">
+                            <div class="modtitle centertext">NEW MOD</div>
+                            <a class="mod-button mod-add" title="Add Modifier"><i class="fas fa-plus-circle fa-2x"></i></a>
+                        </div>
+                    </div>
+                    <div class="new-row">
+                        <div class="flexblock-center">
+                            <ol class="mods-list">
+                                {{#each item.data.mods as |mod id|}}
+                                <li class="mod-block" data-item-id="{{id}}">
+                                    <div class="mod-row">
+                                        <div class="mod-row">
+                                            <a class="mod-delete" title="Delete Mod" name="{{id}}.delete"><i class="fas fa-times-circle"></i></a>
+                                            <label class="label-free">once</label>
+                                            <input class="check-once" index={{id}} name="{{id}}.once" id="{{id}}" type="checkbox" {{checked mod.once}}/>
+                                        </div>
+                                        <div class="mod-row-block">
+
+                                            <div class="col-1-6  mod-row-header">
+                                                MOD
+                                            </div>
+                                            <div class="col-1-2  mod-row-input">
+                                                <input class="mod-input" type="text" name="{{id}}.name" value="{{mod.name}}"/>
+                                            </div>
+                                            <div class="col-1-6  mod-row-header">
+                                                TYPE
+                                            </div>
+                                            <div class="col-1-6  mod-row-input">
+                                                <div class="mod-row-block">
+                                                    <select  class="mod-input"  name="{{id}}.type"  data-type="String">
+                                                        {{#select mod.type}}
+                                                        <option  value="ADD">ADD</option>
+                                                        <option  value="SET">SET</option>
+                                                        <option  value="ITEM">ITEM</option>
+                                                        <option  value="ROLL">ROLL</option>
+                                                        {{/select}}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mod-row-block">
+                                            <div class="col-1-6  mod-row-header">
+                                                IF
+                                            </div>
+                                            <div class="col-1-3 mod-row-input">
+                                                <input class="mod-input" type="text" name="{{id}}.condat" value="{{mod.condat}}" placeholder="COND ATTRIBUTE"/>
+                                            </div>
+                                            <div class="col-1-6  mod-row-input">
+                                                <div class="mod-row-block">
+                                                    <select  class="mod-input"  name="{{id}}.condop"  data-type="String">
+                                                        {{#select mod.condop}}
+                                                        <option  value="NON">NONE</option>
+                                                        <option  value="EQU">=</option>
+                                                        <option  value="HIH">&gt;</option>
+                                                        <option  value="LOW">&lt;</option>
+                                                        <!--                                                        <option  value="ROLL">ROLL</option>-->
+                                                        {{/select}}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-1-3 mod-row-input">
+                                                <input class="mod-input" type="text" name="{{id}}.condvalue" value="{{mod.condvalue}}" placeholder="VALUE"/>
+                                            </div>
+                                        </div>
+                                        {{#ifNot mod.type "ITEM"}}
+                                        {{#ifNot mod.type "ROLL"}}
+                                        <div class="mod-row-block">
+                                            <div class="col-1-3 mod-row-input">
+                                                <input class="mod-input" type="text" name="{{id}}.attribute" value="{{mod.attribute}}" placeholder="ATTRIBUTE KEY"/>
+                                            </div>
+                                            <div class="col-2-3 mod-row-input">
+                                                <input class="mod-input" type="text" name="{{id}}.value" value="{{mod.value}}" placeholder="VALUE"/>
+                                            </div>
+                                        </div>
+                                        {{/ifNot}}
+                                        {{/ifNot}}
+                                        {{#ifCond mod.type "ROLL"}}
+                                        <div class="mod-row-block">
+                                            <div class="col-1-3 mod-row-input">
+                                                <input class="mod-input" type="text" name="{{id}}.attribute" value="{{mod.attribute}}" placeholder="ROLL ID"/>
+                                            </div>
+                                            <div class="col-2-3 mod-row-input">
+                                                <input class="mod-input" type="text" name="{{id}}.value" value="{{mod.value}}" placeholder="VALUE"/>
+                                            </div>
+                                        </div>
+                                        {{/ifCond}}
+                                        {{#ifCond mod.type "ITEM"}}
+                                        <div class="mod-row-listmods">
+                                            <div class="mod-row-block">
+                                                <div class="mod-row-header">
+                                                    SELECT
+                                                </div>
+                                                <div class="mod-row-selectnum  mod-row-input">
+                                                    <input class="mod-input" type="text" name="{{id}}.selectnum" value="{{mod.selectnum}}" placeholder="0 for ALL"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-2-3">
+                                                <div class="mod-row-header">
+                                                    ITEMS (Drop below)
+                                                </div>
+                                                <div class="mod-row-dropblock">
+                                                    <div class="mod-row-input mod-row-itemdrop itemdrop-area" mod="{{id}}">
+                                                        {{#each mod.items as |citem cid|}}
+
+                                                        <div class="flexblock-center itemdrop-area" citemId="{{citem.id}}" cindex={{cid}} mod="{{id}}">
+                                                            <a class="modcitem-edit mod-citem" >{{citem.name}}</a>
+                                                            <a class="modcitem-delete mod-citem" ><i class="fas fa-times-circle"></i></a>
+                                                        </div>
+
+                                                        {{/each}}
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        {{/ifCond}}
+
+                                    </div>
+
+                                </li>
+                                {{/each}}
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</form>
+
+

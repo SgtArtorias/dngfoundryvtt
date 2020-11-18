@@ -1,0 +1,99 @@
+{
+  "name": "dng",
+  "title": "DnG - Fifth Edition System",
+  "description": "A system for playing the fifth edition of the worlds most popular role-playing game in the Foundry Virtual Tabletop environment.",
+  "version": "1.1.1",
+  "author": "Atropos",
+  "scripts": [],
+  "esmodules": ["dng.js"],
+  "styles": ["dng.css"],
+  "packs": [
+    {
+      "name": "heroes",
+      "label": "Starter Heroes",
+      "system": "dng",
+      "path": "./packs/heroes.db",
+      "entity": "Actor"
+    },
+    {
+      "name": "monsters",
+      "label": "Monsters (SRD)",
+      "system": "dng",
+      "path": "./packs/monsters.db",
+      "entity": "Actor"
+    },
+    {
+      "name": "items",
+      "label": "Items (SRD)",
+      "system": "dng",
+      "path": "./packs/items.db",
+      "entity": "Item"
+    },
+    {
+      "name": "tradegoods",
+      "label": "Trade Goods (SRD)",
+      "system": "dng",
+      "path": "./packs/tradegoods.db",
+      "entity": "Item"
+    },
+    {
+      "name": "spells",
+      "label": "Spells (SRD)",
+      "system": "dng",
+      "path": "./packs/spells.db",
+      "entity": "Item"
+    },
+    {
+      "name": "classes",
+      "label": "Classes (SRD)",
+      "system": "dng",
+      "path": "./packs/classes.db",
+      "entity": "Item"
+    },
+    {
+      "name": "classfeatures",
+      "label": "Class Features (SRD)",
+      "system": "dng",
+      "path": "./packs/classfeatures.db",
+      "entity": "Item"
+    },
+    {
+      "name": "races",
+      "label": "Racial Features (SRD)",
+      "system": "dng",
+      "path": "./packs/races.db",
+      "entity": "Item"
+    },
+    {
+      "name": "monsterfeatures",
+      "label": "Monster Features (SRD)",
+      "system": "dng",
+      "path": "./packs/monsterfeatures.db",
+      "entity": "Item"
+    },
+    {
+      "name": "rules",
+      "label": "Rules (SRD)",
+      "system": "dng",
+      "path": "./packs/rules.db",
+      "entity": "JournalEntry"
+    }
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "socket": true,
+  "gridDistance": 5,
+  "gridUnits": "ft",
+  "primaryTokenAttribute": "attributes.hp",
+  "secondaryTokenAttribute": null,
+  "minimumCoreVersion": "0.7.6",
+  "compatibleCoreVersion": "0.7.6",
+  "url": "https://gitlab.com/foundrynet/dng",
+  "manifest": "https://gitlab.com/foundrynet/dng/raw/master/system.json",
+  "download": "https://gitlab.com/foundrynet/dng/-/archive/release-1.1.1/dng-release-1.1.1.zip"
+}

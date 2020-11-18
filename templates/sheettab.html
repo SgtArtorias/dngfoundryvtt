@@ -1,0 +1,106 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <div class="new-row">
+            <div class="header-left">
+                <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+                <div class="new-block">
+                    <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+                    <h3 class="typelabel">TAB</h3>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <div class="atabs">
+        <nav class="sheet-tabs tabs" data-group="primary">
+            <a class="item" data-tab="description">Description</a>
+            <a class="item" data-tab="details">Details</a>
+            <a class="item" data-tab="properties">Panels</a>
+        </nav>
+    </div>
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+        {{!-- Description Tab --}}
+        <div class="tab biography active" data-group="primary" data-tab="description">
+            {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+        </div>
+
+        {{!-- Details Tab --}}
+        <div class="tab biography active" data-group="primary" data-tab="details">
+            <div class="flexblock">
+                <div class="col-1-2">
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Tab Key</label>
+                            <input type="text" name="data.tabKey" value="{{data.tabKey}}" data-dtype="String"/>
+                        </div>
+                    </div>
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Title</label>
+                            <input type="text" name="data.title" value="{{data.title}}" data-dtype="String"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1-2">
+                    <div class="new-row">
+                        <div class="flexblock-left">
+                            <label class="label-medlarge">Control</label>
+                            <select name="data.controlby"  data-type="String">
+                                {{#select item.data.controlby}}
+                                {{#each item.data.bytypes as |bytype key|}}
+                                <option  value="{{key}}">{{key}}</option> {{/each}} {{/select}}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flexblock">
+                <div class="col-1-1">
+                    <div class="flexblock-left">
+                        <div class="col-1-6 ">
+                            VISIBLE IF
+                        </div>
+                        <div class="col-1-3">
+                            <input type="text" name="data.condat" value="{{data.condat}}" placeholder="ATTRIBUTE KEY"/>
+                        </div>
+                        <div class="col-1-6">
+                            <select  name="data.condop"  data-type="String">
+                                {{#select item.data.condop}}
+                                <option  value="NON">NONE</option>
+                                <option  value="EQU">=</option>
+                                <option  value="HIH">&gt;</option>
+                                <option  value="LOW">&lt;</option>
+                                {{/select}}
+                            </select>
+
+                        </div>
+                        <div class="col-1-3">
+                            <input type="text" name="data.condvalue" value="{{data.condvalue}}" placeholder="VALUE"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{!-- Panels Tab --}}
+        <div class="tab properties scrollable" data-group="primary" data-tab="properties">
+            <ol class="properties-list">
+                {{#each data.panels as |panel id|}}
+                <li class="property flexrow" data-item-id="{{id}}">
+                    <h4 class="property-name">{{panel.name}}</h4>
+                    <div class="property-row">
+                        <a class="property-controls item-top" title="Top Item"><i class="fas fa-arrow-alt-circle-up"></i></a>
+                        <a class="property-controls item-bottom" title="Bottom Item"><i class="fas fa-arrow-alt-circle-down"></i></a>
+                        <a class="property-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="property-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </div>
+                </li>
+                {{/each}}
+            </ol>
+        </div>
+
+    </section>
+</form>
