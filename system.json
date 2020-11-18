@@ -93,7 +93,7 @@
   "secondaryTokenAttribute": null,
   "minimumCoreVersion": "0.7.6",
   "compatibleCoreVersion": "0.7.6",
-  "url": "https://github.com/SgtArtorias/dng-mygame-",
-  "manifest": "https://github.com/SgtArtorias/dng-mygame-/blob/master/system.json",
-  "download": "https://github.com/SgtArtorias/dng-mygame-/archive/master.zip"
+  "url": "https://github.com/SgtArtorias/dngfoundryvtt",
+  "manifest": "https://github.com/SgtArtorias/dngfoundryvtt/blob/master/system.json",
+  "download": "https://github.com/SgtArtorias/dngfoundryvtt/archive/master.zip"
 }
