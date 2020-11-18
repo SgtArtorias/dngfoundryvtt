@@ -105,7 +105,7 @@
           },
           "arc": {
             "value": 0,
-            "ability": "int"
+            "ability": "mag"
           },
           "ath": {
             "value": 0,
