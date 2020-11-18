@@ -93,7 +93,7 @@
   "secondaryTokenAttribute": null,
   "minimumCoreVersion": "0.7.6",
   "compatibleCoreVersion": "0.7.6",
-  "url": "https://gitlab.com/foundrynet/dng",
-  "manifest": "https://gitlab.com/foundrynet/dng/raw/master/system.json",
-  "download": "https://gitlab.com/foundrynet/dng/-/archive/release-1.1.1/dng-release-1.1.1.zip"
+  "url": "https://github.com/SgtArtorias/dng-mygame-",
+  "manifest": "https://github.com/SgtArtorias/dng-mygame-/blob/master/system.json",
+  "download": ""
 }
