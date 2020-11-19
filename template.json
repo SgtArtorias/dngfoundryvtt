@@ -89,7 +89,7 @@
             "units": "ft",
             "hover": false
           },
-          "spellcasting": "int",
+          "spellcasting": "mag",
           "speed": {
             "_deprecated": true
           }

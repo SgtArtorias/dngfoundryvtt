@@ -27,7 +27,7 @@ export default class Item5e extends Item {
       const actorData = this.actor.data.data;
 
       // Spells - Use Actor spellcasting modifier
-      if (this.data.type === "spell") return actorData.attributes.spellcasting || "int";
+      if (this.data.type === "spell") return actorData.attributes.spellcasting || "Mag";
 
       // Tools - default to Intelligence
       else if (this.data.type === "tool") return "int";
